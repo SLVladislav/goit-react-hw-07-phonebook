@@ -1,21 +1,21 @@
 import PropTypes from 'prop-types';
 import Contact from '../Contact/Contact';
 import { Item } from './ContactList.styled';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import { deleteContact } from 'redux/contactSlice/contactsSlice';
 
 const ContactList = ({ contacts, visibleContacts }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();s
 
   return contacts ? (
     <ul>
-      {visibleContacts.map(({ id, name, number }) => {
+      {visibleContacts.map(({ id, name, phone }) => {
         return (
           <Item key={id}>
             <Contact
               name={name}
-              number={number}
-              deleteContact={() => dispatch(deleteContact(id))}
+              phone={phone}
+              deleteContact={deleteContact(id)}
               id={id}
             />
           </Item>
@@ -33,7 +33,7 @@ ContactList.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
+      phone: PropTypes.string.isRequired,
     }).isRequired
   ).isRequired,
 };

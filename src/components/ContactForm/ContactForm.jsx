@@ -8,9 +8,7 @@ export default function ContactForm({ contacts }) {
   const dispatch = useDispatch();
 
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
-
-
+  const [phone, setPhone] = useState('');
 
   const handlSubmit = e => {
     e.preventDefault();
@@ -21,7 +19,7 @@ export default function ContactForm({ contacts }) {
 
     isIncludes
       ? alert(`${name} is already in contacts`)
-      : dispatch(addContact({ name, number }));
+      : dispatch(addContact({ name, phone }));
 
     reset();
   };
@@ -34,8 +32,8 @@ export default function ContactForm({ contacts }) {
         setName(value);
         break;
 
-      case 'number':
-        setNumber(value);
+      case 'phone':
+        setPhone(value);
         break;
 
       default:
@@ -45,7 +43,7 @@ export default function ContactForm({ contacts }) {
 
   const reset = () => {
     setName('');
-    setNumber('');
+    setPhone('');
   };
 
   return (
@@ -71,7 +69,7 @@ export default function ContactForm({ contacts }) {
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
-          value={number}
+          value={phone}
           onChange={handleChange}
         />
       </Label>

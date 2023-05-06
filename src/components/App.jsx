@@ -5,13 +5,19 @@ import { Container, Title, Header, Subtitle } from './App.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts, getFilter } from 'redux/selector';
 import { filterContacts } from 'redux/Filter/filterSlice';
+import { useEffect } from 'react';
+import { fetchContacts } from 'redux/operations';
 
 export default function App() {
   const filterState = useSelector(getFilter);
   const contactsState = useSelector(getContacts);
 
   const dispatch = useDispatch();
-  
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
   const handlChangeFilter = e => {
     dispatch(filterContacts(e.currentTarget.value));
   };
