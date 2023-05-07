@@ -10,6 +10,7 @@ export default function ContactForm({ contacts }) {
   const [phone, setPhone] = useState('');
 
   const dispatch = useDispatch();
+
   const handlSubmit = e => {
     e.preventDefault();
 
@@ -62,7 +63,7 @@ export default function ContactForm({ contacts }) {
       </Label>
 
       <Label>
-        <Title>Phone</Title>
+        <Title>Number</Title>
         <Input
           type="tel"
           name="phone"

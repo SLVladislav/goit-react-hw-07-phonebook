@@ -15,6 +15,7 @@ import { reducer } from './reducer';
 export const store = configureStore({
   reducer,
 });
+// console.log(store);
 
 //   middleware: getDefaultMiddleware =>
 //     getDefaultMiddleware({

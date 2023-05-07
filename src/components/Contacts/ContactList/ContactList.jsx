@@ -6,7 +6,7 @@ import { deleteContacts } from 'redux/operations';
 
 const ContactList = ({ contacts, visibleContacts }) => {
   // const dispatch = useDispatch();
-
+  console.log(visibleContacts);
   return contacts ? (
     <ul>
       {visibleContacts.map(({ id, name, phone }) => {

@@ -7,21 +7,9 @@ const STATUS = {
   FULFILLED: 'fulfilled',
   REJECTED: 'rejected',
 };
-const ArrThunks = [addContacts, deleteContacts, fetchContacts];
+const arrThunks = [addContacts, deleteContacts, fetchContacts];
 
-const fn = type => isAnyOf(...ArrThunks.map(contact => contact[type]));
-
-const handleFulfilledGetContacts = (state, { playload }) => {
-  state.items = playload;
-};
-
-const handleFulfilledAddContacts = (state, { playload }) => {
-  state.items.push(playload);
-};
-
-const handleFilfilledDeleteContacts = (state, { playload }) => {
-  state.items = state.items.filter(el => el.id !== playload.id);
-};
+const fn = type => isAnyOf(...arrThunks.map(contact => contact[type]));
 
 const handlePending = state => {
   state.isLoading = true;
@@ -32,22 +20,48 @@ const handleFulfilled = state => {
   state.error = null;
 };
 
+const handleFulfilledGetContacts = (state, action) => {
+  console.log(action.playload);
+  state.items = action.playload;
+};
+
+const handleFulfilledAddContacts = (state, { playload }) => {
+  state.items.push(playload);
+};
+
+const handleFilfilledDeleteContacts = (state, { playload }) => {
+  state.items = state.items.filter(el => el.id !== playload.id);
+};
+
 const handleRejected = (state, { playload }) => {
   state.isLoading = false;
   state.error = playload;
 };
 export const contactSlice = createSlice({
   name: 'contacts',
-  initialState: contactsInitialState,
+  initialState: {
+    items: [],
+    isLoading: false,
+    error: null,
+  },
+  // extraReducers: {
+  //   [fetchContacts.fulfilled](state, action) {
+  //     state.isLoading = false;
+  //     state.error = null;
+  //     state.items = action.payload;
+  //   },
+
   extraReducers: builder => {
+    console.log(builder);
     const { FULFILLED, REJECTED, PENDING } = STATUS;
     builder
+
       .addCase(fetchContacts.fulfilled, handleFulfilledGetContacts)
-      .addCase(addContacts.fulfilled, handleFulfilledAddContacts)
-      .addCase(deleteContacts.fulfilled, handleFilfilledDeleteContacts)
-      .addMatcher(fn(PENDING), handlePending)
-      .addMatcher(fn(FULFILLED), handleFulfilled)
-      .addMatcher(fn(REJECTED), handleRejected);
+      // .addCase(addContacts.fulfilled, handleFulfilledAddContacts)
+      // .addCase(deleteContacts.fulfilled, handleFilfilledDeleteContacts)
+      // .addMatcher(fn(PENDING), handlePending)
+      // .addMatcher(fn(REJECTED), handleRejected)
+      .addMatcher(fn(FULFILLED), handleFulfilled);
   },
 });
 
