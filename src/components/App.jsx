@@ -10,7 +10,7 @@ import { fetchContacts } from 'redux/operations';
 
 export default function App() {
   const filterState = useSelector(getFilter);
-  const contactsState = useSelector(getContacts);
+  const { items, isLoading, error } = useSelector(getContacts);
 
   const dispatch = useDispatch();
 
@@ -23,9 +23,8 @@ export default function App() {
   };
 
   const getVisibleContacts = () => {
-    const normalizedFilter = filterState.toLowerCase();
-    return contactsState.filter(contact => {
-      return contact.name.toLowerCase().includes(normalizedFilter);
+    items.filter(({ name }) => {
+      return name.toLowerCase().includes(filterState.toLowerCase());
     });
   };
 
@@ -34,13 +33,17 @@ export default function App() {
       <Header>
         Phone<Title>book</Title>
       </Header>
-      <ContactForm contacts={contactsState} />
+      <ContactForm contacts={items} />
       <Subtitle>Contacts</Subtitle>
       <Filter filter={filterState} handleChangeFilter={handlChangeFilter} />
-      <ContactList
-        visibleContacts={getVisibleContacts()}
-        contacts={contactsState.length}
-      />
+      {isLoading && <p>Loading contacts...</p>}
+      {items.length > 0 && (
+        <ContactList
+          visibleContacts={getVisibleContacts()}
+          contacts={items.length}
+        />
+      )}
+      {error && <p>{error}</p>}
     </Container>
   );
 }
