@@ -62,7 +62,7 @@ export default function ContactForm({ contacts }) {
       </Label>
 
       <Label>
-        <Title>Number</Title>
+        <Title>Phone</Title>
         <Input
           type="tel"
           name="phone"

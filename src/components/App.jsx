@@ -11,11 +11,15 @@ import { fetchContacts } from 'redux/operations';
 export default function App() {
   const filterState = useSelector(getFilter);
   const { items, isLoading, error } = useSelector(getContacts);
+  console.log(items);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    const promise = dispatch(fetchContacts());
+    return () => {
+      promise.abort();
+    };
   }, [dispatch]);
 
   const handlChangeFilter = e => {
@@ -23,8 +27,9 @@ export default function App() {
   };
 
   const getVisibleContacts = () => {
+    
     items.filter(({ name }) => {
-      return name.toLowerCase().includes(filterState.toLowerCase());
+      name.toLowerCase().includes(filterState.toLowerCase());
     });
   };
 

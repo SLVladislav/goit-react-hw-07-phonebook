@@ -20,7 +20,7 @@ const handleFulfilledAddContacts = (state, { playload }) => {
 };
 
 const handleFilfilledDeleteContacts = (state, { playload }) => {
-  state.items = state.items.filter(contact => contact.id !== playload.id);
+  state.items = state.items.filter(el => el.id !== playload.id);
 };
 
 const handlePending = state => {
