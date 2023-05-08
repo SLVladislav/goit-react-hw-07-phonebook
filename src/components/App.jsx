@@ -11,24 +11,21 @@ import { fetchContacts } from 'redux/operations';
 export default function App() {
   const filterState = useSelector(getFilter);
   // console.log(filterState);
-  // const { items, isLoading, error } = useSelector(getContacts);
   const { items, isLoading, error } = useSelector(state => state.contacts);
-  console.log(items);
-  console.log(isLoading);
+  // const { items, isLoading, error } = useSelector(state => state.contacts);
+  // console.log(items);
+  // console.log(isLoading);
 
   // const { items, isLoading, error } = useSelector(
   //   state => state.contacts.items
   // );
-  const qwe = useSelector(state => state.contacts);
-  console.log(qwe);
+  // const qwe = useSelector(state => state.contacts);
+  // console.log(qwe);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchContacts());
-    // return () => {
-    //   promise.abort();
-    // };
   }, [dispatch]);
 
   const handlChangeFilter = e => {
@@ -52,8 +49,8 @@ export default function App() {
       {isLoading && <p>Loading contacts...</p>}
       {items.length > 0 && (
         <ContactList
-          visibleContacts={getVisibleContacts()}
           contacts={items.length}
+          visibleContacts={getVisibleContacts()}
         />
       )}
       {error && <p>{error}</p>}
