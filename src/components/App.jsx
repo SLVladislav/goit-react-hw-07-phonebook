@@ -11,7 +11,7 @@ import { fetchContacts } from 'redux/operations';
 export default function App() {
   const filterState = useSelector(getFilter);
   // console.log(filterState);
-  const { items, isLoading, error } = useSelector(state => state.contacts);
+  const { items, isLoading, error } = useSelector(getContacts);
   // const { items, isLoading, error } = useSelector(state => state.contacts);
   // console.log(items);
   // console.log(isLoading);
