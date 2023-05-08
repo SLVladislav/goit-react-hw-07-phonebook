@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import { addContacts } from 'redux/operations';
 
 export default function ContactForm({ contacts }) {
-  console.log(contacts);
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
 
