@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { FaUserAlt, FaTrash } from 'react-icons/fa';
 import { Icon, Number, Wrapper, Button } from './Contact.styled';
-// import { deleteContact } from 'redux/contactSlice/contactsSlice';
 import { useDispatch } from 'react-redux';
 import { deleteContacts } from 'redux/operations';
 

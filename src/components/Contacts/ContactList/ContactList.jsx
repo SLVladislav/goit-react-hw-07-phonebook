@@ -1,12 +1,9 @@
 import PropTypes from 'prop-types';
 import Contact from '../Contact/Contact';
 import { Item } from './ContactList.styled';
-// import { useDispatch } from 'react-redux';
 import { deleteContacts } from 'redux/operations';
 
 const ContactList = ({ contacts, visibleContacts }) => {
-  // const dispatch = useDispatch();
-  // console.log(contacts);
   return contacts ? (
     <ul>
       {visibleContacts.map(({ id, name, phone }) => {
